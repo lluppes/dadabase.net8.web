@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------------------------------------------------
 # FYI: You need to set up some secrets before running this workflows - see CreateGitHubSecrets.md for details.
 # ------------------------------------------------------------------------------------------------------------------------
-name: 1 - Deploy Infrastructure
+name: 1.deploy.infrastructure
 run-name: '1 - Deploy Infra: ${{ inputs.bicepDeploymentMode }} using ENV ${{ inputs.deployEnvironment }} by @${{ github.actor }}'
 
 on: 
@@ -40,6 +40,7 @@ permissions:
   checks: write
   issues: read
   pull-requests: read
+  packages: read
 
 # ------------------------------------------------------------------------------------------------------------------------
 jobs:
@@ -49,7 +50,8 @@ jobs:
     secrets: inherit
     if: inputs.runSecurityScan
     with:
-      runSecurityScan: ${{ inputs.runSecurityScan }}
+      runMSDevSecOpsScan: ${{ inputs.runSecurityScan }}
+      runGHASScan: false
 
 # ------------------------------------------------------------------------------------------------------------------------
   Deploy_Bicep:

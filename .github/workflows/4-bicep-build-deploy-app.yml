@@ -60,6 +60,7 @@ permissions:
   checks: write
   issues: read
   pull-requests: read
+  packages: read
 
 # ------------------------------------------------------------------------------------------------------------------------
 jobs:
@@ -69,7 +70,8 @@ jobs:
     secrets: inherit
     if: inputs.runSecurityScan
     with:
-      runSecurityScan: ${{ inputs.runSecurityScan }}
+      runMSDevSecOpsScan: ${{ inputs.runSecurityScan }}
+      runGHASScan: ${{ inputs.runSecurityScan }}
 
   # ------------------------------------------------------------------------------------------------------------------------
   create-infra:
